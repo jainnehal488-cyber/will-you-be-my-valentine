@@ -34,7 +34,7 @@ noBtn.addEventListener("mouseover", () => {
 
 // Sexy tease on YES hover
 yesBtn.addEventListener("mouseenter", () => {
-  yesBtn.textContent = "Don’t act shy 😌";
+  yesBtn.textContent = "Don't act shy 😌";
   document.body.style.filter = "brightness(0.92)";
 });
 
@@ -46,7 +46,7 @@ yesBtn.addEventListener("mouseleave", () => {
 // YES click = romance unlocked
 yesBtn.addEventListener("click", () => {
   document.getElementById("question").textContent = "Come here. 💋";
-  message.textContent = "I knew you’d give in.";
+  message.textContent = "I knew you'd give in.";
 
   noBtn.style.display = "none";
   yesBtn.style.display = "none";
@@ -99,4 +99,3 @@ function animate() {
   });
   requestAnimationFrame(animate);
 }
-
