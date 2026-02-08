@@ -1,6 +1,7 @@
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
 const message = document.getElementById("message");
+const progress = document.getElementById("progress");
 
 let noCount = 0;
 
@@ -10,79 +11,77 @@ const noMessages = [
   "Okay but like… why?",
   "My feelings are loading… ⏳",
   "You’re smiling. I know it.",
-  "I’m telling your mom.",
+  "Playing hard to get, huh? 😏",
   "This button is stressed.",
   "Just click yes bobooo 😭"
 ];
-.whisper {
-  font-size: 14px;
-  opacity: 0.6;
-  letter-spacing: 1px;
-  margin-top: -10px;
-}
-yesBtn.addEventListener("mouseover", () => {
-  yesBtn.textContent = "Don’t act like you don’t want to 😌";
-});
 
-yesBtn.addEventListener("mouseout", () => {
-  yesBtn.textContent = "YES 💖";
-});
-yesBtn.addEventListener("mouseenter", () => {
-  document.body.style.filter = "brightness(0.92)";
-});
-yesBtn.addEventListener("mouseleave", () => {
-  document.body.style.filter = "brightness(1)";
-});
-yesBtn.addEventListener("click", () => {
-  const iframe = document.getElementById("ytMusic").contentWindow;
-
-  // unmute + play
-  iframe.postMessage(
-    '{"event":"command","func":"unMute","args":""}',
-    "*"
-  );
-  iframe.postMessage(
-    '{"event":"command","func":"playVideo","args":""}',
-    "*"
-  );
-});
-
-
+// NO button runs + guilt trip
 noBtn.addEventListener("mouseover", () => {
   noCount++;
-  const randomX = Math.random() * 200 - 100;
-  const randomY = Math.random() * 200 - 100;
-  noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
 
-  message.textContent = noMessages[Math.min(noCount, noMessages.length - 1)];
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+  message.textContent =
+    noMessages[Math.min(noCount, noMessages.length - 1)];
+
+  progress.style.width = Math.min(noCount * 14, 100) + "%";
+
+  yesBtn.style.transform = `scale(${1 + noCount * 0.08})`;
 });
 
+// Sexy tease on YES hover
+yesBtn.addEventListener("mouseenter", () => {
+  yesBtn.textContent = "Don’t act shy 😌";
+  document.body.style.filter = "brightness(0.92)";
+});
+
+yesBtn.addEventListener("mouseleave", () => {
+  yesBtn.textContent = "YES 💖";
+  document.body.style.filter = "brightness(1)";
+});
+
+// YES click = romance unlocked
 yesBtn.addEventListener("click", () => {
   document.getElementById("question").textContent = "Come here. 💋";
-  message.textContent = "I’ve been waiting for that.";
+  message.textContent = "I knew you’d give in.";
+
+  noBtn.style.display = "none";
+  yesBtn.style.display = "none";
 
   document.body.style.background =
-    "linear-gradient(135deg, #2b2b2b, #000)";
+    "linear-gradient(135deg, #1e1e2f, #000)";
+
+  // Play YouTube music
+  const iframe = document.getElementById("ytMusic").contentWindow;
+  iframe.postMessage(
+    '{"event":"command","func":"unMute","args":""}', "*"
+  );
+  iframe.postMessage(
+    '{"event":"command","func":"playVideo","args":""}', "*"
+  );
 
   startConfetti();
 });
 
+// CONFETTI
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const confetti = [];
 
 function startConfetti() {
-  for (let i = 0; i < 150; i++) {
+  for (let i = 0; i < 160; i++) {
     confetti.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       r: Math.random() * 6 + 4,
-      d: Math.random() * 10 + 5,
-      color: `hsl(${Math.random() * 360}, 100%, 70%)`
+      d: Math.random() * 8 + 4,
+      color: `hsl(${Math.random() * 360},100%,70%)`
     });
   }
   animate();
@@ -100,3 +99,4 @@ function animate() {
   });
   requestAnimationFrame(animate);
 }
+
