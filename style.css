@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  max-width: 90%;
+}
+
+h1 {
+  margin-bottom: 25px;
+}
+
+.buttons {
+  position: relative;
+}
+
+button {
+  padding: 14px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 10px;
+  transition: all 0.3s ease;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#yes:hover {
+  transform: scale(1.1);
+}
+
+#no {
+  background: #ccc;
+  position: absolute;
+}
+
+#message {
+  margin-top: 25px;
+  font-size: 18px;
+  color: #ff4d6d;
+  min-height: 24px;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
