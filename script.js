@@ -5,13 +5,48 @@ const message = document.getElementById("message");
 let noCount = 0;
 
 const noMessages = [
-  "Are you sure? 😐",
-  "Think again… 🥺",
-  "That button seems dangerous 👀",
-  "I won’t give up that easily 😤",
-  "Okay now you’re just being mean 😭",
-  "Last chance… PLEASE 💔"
+  "Excuse me?? 😐",
+  "That was rude.",
+  "Okay but like… why?",
+  "My feelings are loading… ⏳",
+  "You’re smiling. I know it.",
+  "I’m telling your mom.",
+  "This button is stressed.",
+  "Just click yes bobooo 😭"
 ];
+.whisper {
+  font-size: 14px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+  margin-top: -10px;
+}
+yesBtn.addEventListener("mouseover", () => {
+  yesBtn.textContent = "Don’t act like you don’t want to 😌";
+});
+
+yesBtn.addEventListener("mouseout", () => {
+  yesBtn.textContent = "YES 💖";
+});
+yesBtn.addEventListener("mouseenter", () => {
+  document.body.style.filter = "brightness(0.92)";
+});
+yesBtn.addEventListener("mouseleave", () => {
+  document.body.style.filter = "brightness(1)";
+});
+yesBtn.addEventListener("click", () => {
+  const iframe = document.getElementById("ytMusic").contentWindow;
+
+  // unmute + play
+  iframe.postMessage(
+    '{"event":"command","func":"unMute","args":""}',
+    "*"
+  );
+  iframe.postMessage(
+    '{"event":"command","func":"playVideo","args":""}',
+    "*"
+  );
+});
+
 
 noBtn.addEventListener("mouseover", () => {
   noCount++;
@@ -23,16 +58,15 @@ noBtn.addEventListener("mouseover", () => {
 });
 
 yesBtn.addEventListener("click", () => {
-  document.getElementById("question").textContent =
-    "YAYYYY 💞 I knew it!!!";
-  message.textContent =
-    "You just made my heart do a happy dance 💃🕺";
+  document.getElementById("question").textContent = "Come here. 💋";
+  message.textContent = "I’ve been waiting for that.";
 
-  noBtn.style.display = "none";
-  yesBtn.style.display = "none";
+  document.body.style.background =
+    "linear-gradient(135deg, #2b2b2b, #000)";
 
   startConfetti();
 });
+
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 
