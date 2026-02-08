@@ -66,3 +66,9 @@ canvas {
   left: 0;
   pointer-events: none;
 }
+.whisper {
+  font-size: 14px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+  margin-top: -10px;
+}
