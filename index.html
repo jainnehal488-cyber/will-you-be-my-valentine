@@ -27,14 +27,20 @@
     </div>
   </div>
 
-  <!-- Hidden YouTube music -->
+  <!-- 🎧 Mobile-safe YouTube music (iOS compatible) -->
   <iframe
     id="ytMusic"
-    width="0"
-    height="0"
-    src="https://www.youtube.com/embed/o2tdLOK7-PE?enablejsapi=1&mute=1"
+    src="https://www.youtube.com/embed/o2tdLOK7-PE?enablejsapi=1&mute=1&playsinline=1"
     frameborder="0"
-    allow="autoplay">
+    allow="autoplay; encrypted-media"
+    style="
+      position: fixed;
+      bottom: -100px;
+      left: -100px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    ">
   </iframe>
 
   <canvas id="confetti"></canvas>
