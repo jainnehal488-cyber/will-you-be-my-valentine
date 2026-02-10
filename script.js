@@ -19,8 +19,9 @@ const noMessages = [
 const moveNoButton = () => {
   noCount++;
 
-  const maxX = window.innerWidth < 600 ? 120 : 200;
-  const maxY = window.innerWidth < 600 ? 120 : 200;
+  const isMobile = window.innerWidth < 600;
+  const maxX = isMobile ? 120 : 200;
+  const maxY = isMobile ? 120 : 200;
 
   const x = Math.random() * maxX - maxX / 2;
   const y = Math.random() * maxY - maxY / 2;
@@ -35,22 +36,8 @@ const moveNoButton = () => {
   yesBtn.style.transform = `scale(${1 + noCount * 0.08})`;
 };
 
-noBtn.addEventListener("mouseover", moveNoButton);   // desktop
-noBtn.addEventListener("touchstart", moveNoButton); // mobile
-
-  noCount++;
-
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 200 - 100;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
-
-  message.textContent =
-    noMessages[Math.min(noCount, noMessages.length - 1)];
-
-  progress.style.width = Math.min(noCount * 14, 100) + "%";
-
-  yesBtn.style.transform = `scale(${1 + noCount * 0.08})`;
-});
+noBtn.addEventListener("mouseenter", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton);
 
 // Sexy tease on YES hover
 yesBtn.addEventListener("mouseenter", () => {
@@ -70,9 +57,10 @@ yesBtn.addEventListener("click", () => {
 
   noBtn.style.display = "none";
   yesBtn.style.display = "none";
-if (navigator.vibrate) {
-  navigator.vibrate([30, 40, 30]);
-}
+
+  if (navigator.vibrate) {
+    navigator.vibrate([30, 40, 30]);
+  }
 
   document.body.style.background =
     "linear-gradient(135deg, #1e1e2f, #000)";
@@ -98,8 +86,8 @@ canvas.height = window.innerHeight;
 const confetti = [];
 
 function startConfetti() {
- const confettiCount = window.innerWidth < 600 ? 80 : 160;
-for (let i = 0; i < confettiCount; i++) {
+  const confettiCount = window.innerWidth < 600 ? 80 : 160;
+  for (let i = 0; i < confettiCount; i++) {
     confetti.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
