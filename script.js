@@ -2,6 +2,7 @@ const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
 const message = document.getElementById("message");
 const progress = document.getElementById("progress");
+const container = document.querySelector(".buttons");
 
 let noCount = 0;
 
@@ -16,17 +17,21 @@ const noMessages = [
   "Just click yes bobooo 😭"
 ];
 
+// ✅ MOBILE + DESKTOP SAFE
 const moveNoButton = () => {
   noCount++;
 
-  const isMobile = window.innerWidth < 600;
-  const maxX = isMobile ? 120 : 200;
-  const maxY = isMobile ? 120 : 200;
+  const containerRect = container.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
 
-  const x = Math.random() * maxX - maxX / 2;
-  const y = Math.random() * maxY - maxY / 2;
+  const maxX = containerRect.width - btnRect.width;
+  const maxY = containerRect.height - btnRect.height;
 
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
 
   message.textContent =
     noMessages[Math.min(noCount, noMessages.length - 1)];
@@ -36,10 +41,10 @@ const moveNoButton = () => {
   yesBtn.style.transform = `scale(${1 + noCount * 0.08})`;
 };
 
-noBtn.addEventListener("mouseenter", moveNoButton);
-noBtn.addEventListener("touchstart", moveNoButton);
+// ONE event that works everywhere
+noBtn.addEventListener("pointerdown", moveNoButton);
 
-// Sexy tease on YES hover
+// Sexy tease
 yesBtn.addEventListener("mouseenter", () => {
   yesBtn.textContent = "Don't act shy 😌";
   document.body.style.filter = "brightness(0.92)";
@@ -50,7 +55,7 @@ yesBtn.addEventListener("mouseleave", () => {
   document.body.style.filter = "brightness(1)";
 });
 
-// YES click = romance unlocked
+// YES click
 yesBtn.addEventListener("click", () => {
   document.getElementById("question").textContent = "Come here. 💋";
   message.textContent = "I knew you'd give in.";
@@ -86,8 +91,8 @@ canvas.height = window.innerHeight;
 const confetti = [];
 
 function startConfetti() {
-  const confettiCount = window.innerWidth < 600 ? 80 : 160;
-  for (let i = 0; i < confettiCount; i++) {
+  const count = window.innerWidth < 600 ? 80 : 160;
+  for (let i = 0; i < count; i++) {
     confetti.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
